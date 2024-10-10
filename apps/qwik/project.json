@@ -1,37 +1,41 @@
 {
   "name": "qwik",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/src",
+  "sourceRoot": "apps/qwik/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "qwik-nx:build",
       "options": {
         "runSequence": ["qwik:build.client", "qwik:build.ssr"],
-        "outputPath": "dist/apps"
+        "outputPath": "dist/apps/qwik"
       },
       "configurations": {
-        "preview": {}
+        "preview": {},
+        "express": {}
       }
     },
     "build.client": {
       "executor": "@nx/vite:build",
       "options": {
-        "outputPath": "dist/apps",
-        "configFile": "apps/vite.config.ts"
+        "outputPath": "dist/apps/qwik",
+        "configFile": "apps/qwik/vite.config.ts"
       }
     },
     "build.ssr": {
       "executor": "@nx/vite:build",
       "defaultConfiguration": "preview",
       "options": {
-        "outputPath": "dist/apps"
+        "outputPath": "dist/apps/qwik"
       },
       "configurations": {
         "preview": {
           "ssr": "src/entry.preview.tsx",
           "mode": "production"
+        },
+        "express": {
+          "configFile": "apps/qwik/adapters/express/vite.config.ts"
         }
       }
     },
@@ -68,8 +72,21 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["apps/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/qwik/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "build-express": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx nx run qwik:build:express"
+      }
+    },
+    "deploy-express": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node dist/apps/qwik/server/entry.express"
+      },
+      "dependsOn": ["build-express"]
     }
   }
 }

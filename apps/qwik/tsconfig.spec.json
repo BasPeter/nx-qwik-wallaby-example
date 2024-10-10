@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist/out-tsc",
+    "types": ["vitest/globals", "node"]
+  },
+  "include": [
+    "vite.config.ts",
+    "qwik/src/**/*.test.ts",
+    "qwik/src/**/*.spec.ts",
+    "qwik/src/**/*.test.tsx",
+    "qwik/src/**/*.spec.tsx",
+    "qwik/src/**/*.test.js",
+    "qwik/src/**/*.spec.js",
+    "qwik/src/**/*.test.jsx",
+    "qwik/src/**/*.spec.jsx",
+    "qwik/src/**/*.d.ts"
+  ]
+}
