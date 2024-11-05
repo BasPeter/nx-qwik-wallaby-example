@@ -3,7 +3,7 @@ import { DocumentHead, routeLoader$ } from '@builder.io/qwik-city';
 import { Link } from '@builder.io/qwik-city';
 import { Content, fetchOneEntry, getBuilderSearchParams } from '@builder.io/sdk-qwik';
 
-const BUILDER_API_KEY = 'builder-api-key';
+const BUILDER_API_KEY = `add builder api key here`;
 const BUILDER_MODEL = 'page';
 
 export const useBuilderContent = routeLoader$(async ({ url, error }) => {
